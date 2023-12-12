@@ -15,6 +15,7 @@ func main() {
 	}
 
 	//输出随机生成的数组
+
 	fmt.Println(arr)
 
 	selectionSort(arr)
