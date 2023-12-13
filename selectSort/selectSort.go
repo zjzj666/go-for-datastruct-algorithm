@@ -3,13 +3,12 @@ package main
 import (
 	"errors"
 	"fmt"
-	"math/rand"
-	"time"
+	"go-for-datastruct-algorithm/utils"
 )
 
 func main() {
 	//随机生成一个数组并打印
-	arr, err := generateRandomArray(10, -50, 100)
+	arr, err := utils.GenerateRandomArray(10, -50, 100)
 	if err != nil {
 		panic(err)
 	}
@@ -36,15 +35,8 @@ func selectionSort(arr []int) {
 			panic(err)
 		}
 		//把minIndex位置的数与i交换
-		swap(arr, i, minIndex)
+		utils.Swap(arr, i, minIndex)
 	}
-}
-
-// swap 交换数组中两个位置的值
-func swap(arr []int, i int, j int) {
-	tmp := arr[i]
-	arr[i] = arr[j]
-	arr[j] = tmp
 }
 
 // findMinIndexInArray 查询给定范围下数组中最小值索引
@@ -62,21 +54,4 @@ func findMinIndexInArray(arr []int, begin int, end int) (int, error) {
 		}
 	}
 	return minIndex, nil
-}
-
-// generateRandomArray 随机生成指定长度和范围的数组
-func generateRandomArray(size, min, max int) ([]int, error) {
-	//输入参数检测
-	if size <= 0 || max <= min {
-		return nil, errors.New("输入的长度或范围有误")
-	}
-
-	//设计随机数种子
-	rand.Seed(time.Now().UnixNano())
-
-	arr := make([]int, size)
-	for i := 0; i < size; i++ {
-		arr[i] = rand.Intn(max-min+1) + min // 生成[min, max]范围内的随机整数
-	}
-	return arr, nil
 }
